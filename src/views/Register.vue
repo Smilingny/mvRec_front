@@ -8,7 +8,7 @@
 <template>
   <div>
     <div class="contain">
-      <h1 style="color: #2980b9;">注册</h1>
+      <h1 style="color:aliceblue; margin-bottom: 15px;">注册</h1>
       <div class="login">
         <input class='input-item' v-model="username" type="text" placeholder="请输入账号"> 
         <input class='input-item' v-model="password" type="password" placeholder="请输入密码"> 
@@ -28,6 +28,18 @@
   justify-content: center; 
   align-items: center; 
 }
+.contain::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../assets/backgroundpic.jpeg);
+  filter: blur(15px);
+  z-index: -1;
+  background-size: cover;
+}
 .login{
   width: 450px;
   height: 400px;
@@ -38,6 +50,7 @@
   justify-content: center;
   align-items: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  background-color: aliceblue;
 }
 .input-item{
   display: block;
@@ -60,8 +73,8 @@
   background-color: grey;
 }
 .return{
-  margin-top: 35px;
-  font-size: 10px;
+  margin-top: 30px;
+  font-size: 11px;
   color: #2980b9;
 }
 </style>

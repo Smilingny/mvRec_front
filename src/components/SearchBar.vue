@@ -1,7 +1,14 @@
 <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  const router = useRouter()
   import { Search } from '@element-plus/icons-vue'
- 
+  const toUserCenter = ()=>{
+    router.push('/usercenter/userinfo')
+  }
+  const toSearchResult = ()=>{
+    router.push('/searchresult')
+  }
 </script>
 
 <template>
@@ -15,9 +22,11 @@
       v-model="input2"
       class="input-item"
       placeholder="Please Input"
-      :prefix-icon="Search"
     />
-    <el-icon :size="25" class="icon2"><User /></el-icon>
+    <!-- 去搜索结果 -->
+    <button class="but" @click="toSearchResult">搜索</button>
+    <!-- 去用户中心 -->
+    <el-icon :size="25" class="icon2" @click="toUserCenter"><User /></el-icon>
     </div>
   </div>
 </template>
@@ -61,6 +70,12 @@
   font-size: 15px;
   font-weight: 700;
   display: block;
+  color: #2980b9;
+}
+.but{
+  width: 50px;
+  height: 30px;
+  border: none;
   color: #2980b9;
 }
 .input-item{

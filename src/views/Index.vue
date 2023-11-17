@@ -1,6 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue'
 import SearchBar from '../components/SearchBar.vue'
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
 
 const i = "@/assets/indexview/xskdjs2.webp"
 
@@ -176,6 +178,10 @@ function handleClickTab(tab) {
     activeTab.value = tab.value;
 }
 
+const toDetail=()=>{
+    router.push('/moviedetail')
+}
+
 </script>
 
 <template>
@@ -225,7 +231,7 @@ function handleClickTab(tab) {
             <el-divider />
             <el-row :gutter="20">
                 <el-col :span="6" v-for="item in currentMovies" :key="item.name">
-                    <el-card shadow="hover" style="background-image: url('/src/assets/indexview/agzz2.webp');">
+                    <el-card shadow="hover" style="background-image: url('/src/assets/indexview/agzz2.webp');" @click="toDetail">
                     </el-card>
                     <p>{{ item.name }}</p>
                 </el-col>
