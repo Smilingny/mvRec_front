@@ -1,21 +1,20 @@
 <script setup>
   import { ref } from 'vue'
-  import { useRouter, useRoute } from 'vue-router'
-  const router = useRouter()
-  const route = useRoute()
   const username = ref('')
   const password = ref('')
+  const checkpassword = ref('')
 </script>
 
 <template>
   <div>
     <div class="contain">
-      <h1 style="color: #2980b9;">登录</h1>
+      <h1 style="color: #2980b9;">注册</h1>
       <div class="login">
         <input class='input-item' v-model="username" type="text" placeholder="请输入账号"> 
         <input class='input-item' v-model="password" type="password" placeholder="请输入密码"> 
-        <button class="btn">登录</button>
-        <router-link to="/register" class="return">前往注册</router-link>
+        <input class='input-item' v-model="checkpassword" type="password" placeholder="确认密码"> 
+        <button class="btn">点击注册</button>
+        <router-link to="/" class="return">返回登录</router-link>
       </div>
   </div>
   </div>
@@ -31,7 +30,7 @@
 }
 .login{
   width: 450px;
-  height: 350px;
+  height: 400px;
   border: 2px solid #2980b9;
   border-radius: 20px;
   display: flex;
@@ -61,7 +60,7 @@
   background-color: grey;
 }
 .return{
-  margin-top: 30px;
+  margin-top: 35px;
   font-size: 10px;
   color: #2980b9;
 }
