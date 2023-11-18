@@ -8,7 +8,7 @@ const i = "@/assets/indexview/xskdjs2.webp"
 
 
 const list = [{
-    title: '肖申克的救赎',
+    title: '肖申克的赎',
     image: 'xskdjs2.webp',
     desc: '我是肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎肖申克的救赎'
 },
