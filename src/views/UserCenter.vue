@@ -18,16 +18,16 @@ const getUserInfo=()=>{
 
 <template>
   <div class="common-layout" >
-      <div  class="side">Aside
+      <div  class="side">
         <div class="img_contain">
           <el-avatar size="large"><img src="../../public/GGbond.jpg" /></el-avatar>
-          <div>{{username}}</div>
+          <div class="uname">{{username}}</div>
         </div>
         <el-divider />
         <div class="two_button">
-          <el-button class="bt" @click="toUserInfo" type="primary" round> <el-icon ><UserFilled /></el-icon>个人信息</el-button>
+          <el-button class="bt" @click="toUserInfo"  round> <el-icon ><UserFilled /></el-icon>个人信息</el-button>
 
-          <el-button class="bt" @click="toBrowsingHistory" type="success" round><el-icon><View /></el-icon>浏览记录</el-button>
+          <el-button class="bt" @click="toBrowsingHistory" round><el-icon><View /></el-icon>浏览记录</el-button>
         </div>
       </div>
       <div class="main">
@@ -55,10 +55,13 @@ const getUserInfo=()=>{
     display: flex;
   }
   .side{
-    background-color: white;
+    background-color: #666666;
     width: 18vw;
     height: 100vh;
     position: fixed;
+    border: 1px white solid;
+    margin-left: 20px;
+
   }
 
   .side .img_contain{
@@ -69,7 +72,7 @@ const getUserInfo=()=>{
     flex-direction: column;
     padding: 2.5vh;
     font-size: 20px;
-    background-image: url("../../public/bacimg.png") ;
+    background-color: #666666;
   }
   .side .two_button{
     display: flex;
@@ -84,5 +87,9 @@ const getUserInfo=()=>{
     font-size: 20px;
     border-radius: 5vw;
     text-align: center;
+  }
+  .uname{
+    margin-top: 15px;
+    color: white;
   }
 </style>

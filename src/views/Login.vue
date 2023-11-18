@@ -7,7 +7,6 @@
   const password = ref('')
   const toIndex=()=>(
     router.push('/index')
-    
   )
 </script>
 
@@ -16,8 +15,8 @@
     <div class="contain">
       <h1 style="color:aliceblue; margin-bottom: 15px;">登录</h1>
       <div class="login">
-        <input class='input-item' v-model="username" type="text" placeholder="请输入账号"> 
-        <input class='input-item' v-model="password" type="password" placeholder="请输入密码"> 
+        <input class='input-item' v-model="username" type="text" placeholder="请输入账号">
+        <input class='input-item' v-model="password" type="password" placeholder="请输入密码">
         <button class="btn" @click="toIndex">登录</button>
         <router-link to="/register" class="return">前往注册</router-link>
       </div>
@@ -30,8 +29,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   /* background-image: url(../assets/backgroungpic.jpg);
   background-size: cover; */
 }

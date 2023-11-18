@@ -3,6 +3,7 @@
 import {ArrowLeftBold, ArrowRightBold, Star, StarFilled} from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";
 import MovieList from "@/components/MovieList.vue";
+import SearchBar from "@/components/SearchBar.vue";
 const changeComment=()=>{//修改评论
 
 }
@@ -56,14 +57,26 @@ const value0= ref(10)
 const value=ref(value0.value/2);
 const director=ref(["sssssss","wdswdswsw"])
 const actor=ref(["123477","4667999","4455555"])
+const comdata=ref([
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhssssssssssssssssssssssssssssssssssssssshsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
+  {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'}
+])
 const story=ref("依据具体的设计需求，我们可以通过以下步骤来设置 Element 分割线宽度： 1. 在 HTML 页面中引入 Element UI 组件库的分割线组件，并在页面中使用该组件。 2. 在分割线组件中设置分割线宽度属性值。 在 Element UI 分割线组件中，分割线宽度属性的默认值为 1 像素，可以通过传入不同的属性值来控制分割线的粗细。 例如，我们可以通过设置类似下面的代码来将分割线宽度设置为 2 像素：")
 </script>
 
 <template>
   <div class="movie_detail">
+    <SearchBar></SearchBar>
     <div class="top">
       <div class="left">
-        <div class="backbutton"><el-button :icon="ArrowLeftBold" @click="back"></el-button> </div>
         <div class="image"><img src="../../public/GGbond.jpg"/></div>
         <div class="tag">
           <div class="flex flex-wrap gap-2 my-2">
@@ -94,7 +107,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
             <div class="peoples">2500人评分</div>
           </div>
         </div>
-        <div my_comment><el-button @click="changeComment" round>我的评分：{{ my_comment }}</el-button></div>
+<!--        <div my_comment><el-button @click="changeComment" round>我的评分：{{ my_comment }}</el-button></div>-->
       </div>
       <div class="right">
         <div class="director">
@@ -126,49 +139,25 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
         </div>
       </div>
     </div>
+    <el-divider content-position="left">用户评论</el-divider>
+    <div class="comments">
+      <el-scrollbar>
+        <div class="scrollbar-flex-content">
+          <p class="comsection" v-for="item in comdata">
+            <div class="sectiontop" >
+              <div class="uname">{{item.uname}}</div>
+              <div class="score">{{ item.score}}</div>
+              <div class="like"><el-button type="danger" :icon="Star" circle /></div>
+            </div>
+            <el-divider />
+            <div class="sectiontbottom">{{item.content}}</div>
+          </p>
+        </div>
+      </el-scrollbar>
+    </div>
     <div class="movie_recomand" >
-      <div class="mainline"><el-divider class="mydiver">相关推荐</el-divider></div>
+      <el-divider content-position="left">电影列表</el-divider>
       <div class="move_container">
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影1</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影2</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影3</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影4</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影4</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影4</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影4</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影4</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影4</span>-->
-<!--        </div>-->
-<!--        <div class="move">-->
-<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
-<!--          <span>电影4</span>-->
-<!--        </div>-->
         <MovieList :m-list="movieLists"></MovieList>
       </div>
     </div>
@@ -176,15 +165,51 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
 </template>
 
 <style scoped>
+.mx-1{
+  margin-left: 3px;
+}
+.user .like .score{
+  width: 30px;
+}
+.scrollbar-flex-content {
+  display: flex;
+}
+.comsection{
+  width: 400px;
+  height: 300px;
+  display: flex;
+  border: 1px solid white;
+  flex-shrink: 0;
+  //align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #606266;
+  color: white;
+}
+.sectiontop{
+  display: flex;
+  justify-content: space-around;
+
+}
+.sectiontbottom{
+
+  word-wrap: break-word;
+  white-space: pre-line;
+  line-height: 1.5;
+
+}
+
   .movie_detail{
     color: aliceblue;
-    background-color: rgb(30, 30, 30);
+    background-color: black;
   }
   .top{
     width: 90vw;
     height: 90vh;
-
     display: flex;
+    padding-top: 50px;
+    padding-left: 100px;
   }
   .left{
     display: flex;
@@ -202,8 +227,8 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
     margin-top: 0.5vh;
   }
   .movie_name{
-    font-size: 1.5vw;
-    color: #606266;
+    font-size: 2vw;
+    color: white;
   }
   .image{
     /* //border: 1px solid red; */
@@ -236,17 +261,17 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
     margin: 0.5vw;
   }
   .actor{
-    border: 1px solid #c8c9cc;
+    //border: 1px solid #c8c9cc;
     height: 20%;
     width: 80%;
   }
   .director{
-    border: 1px solid #c8c9cc;
+    //border: 1px solid #c8c9cc;
     height: 20%;
     width: 80%;
   }
   .story{
-    border: 1px solid #c8c9cc;
+    //border: 1px solid #c8c9cc;
     height: 60%;
     width: 80%;
   }
@@ -277,24 +302,11 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
 
 .movie_recomand{
   /* //border: 1px solid red; */
-  width: 90vw;
+  width: 100%;
 }
   .mainline div{
     border:dashed  2px #b1b3b8;
   }
 
-  .move{
-    width: 20%;
-    height: 80%;
-    margin-bottom: 2vh;
-  }
-  .move div{
-    margin-bottom: 2vh;
-  }
-  .move_container img{
-    width: 10vw;
-  }
-  .move span{
-    text-align: center;
-  }
+
 </style>
