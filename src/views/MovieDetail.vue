@@ -2,6 +2,7 @@
 
 import {ArrowLeftBold, ArrowRightBold, Star, StarFilled} from "@element-plus/icons-vue";
 import {onMounted, ref} from "vue";
+import MovieList from "@/components/MovieList.vue";
 const changeComment=()=>{//修改评论
 
 }
@@ -18,6 +19,38 @@ const items=ref([
   { type: 'danger', label: '标签四' },
   { type: 'warning', label: '标签五' }
 ])
+const movieLists = ref([
+  {
+    name: 'movie1',
+    kind: 'comedy',
+    img: '/src/assets/indexview/agzz1.webp'
+  },
+  {
+    name: 'movie2',
+    kind: 'science',
+    img: '/src/assets/indexview/agzz1.webp'
+  },
+  {
+    name: 'movie3',
+    kind: 'horror',
+    img: 'agzz2.webp'
+  },
+  {
+    name: 'movie11',
+    kind: 'comedy',
+    img: 'agzz2.webp'
+  },
+  {
+    name: 'movie12',
+    kind: 'science',
+    img: 'agzz2.webp'
+  },
+  {
+    name: 'movie13',
+    kind: 'horror',
+    img: 'agzz2.webp'
+  },
+]);
 const my_comment=ref(8)
 const value0= ref(10)
 const value=ref(value0.value/2);
@@ -96,56 +129,61 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
     <div class="movie_recomand" >
       <div class="mainline"><el-divider class="mydiver">相关推荐</el-divider></div>
       <div class="move_container">
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影1</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影2</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影3</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影4</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影4</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影4</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影4</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影4</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影4</span>
-        </div>
-        <div class="move">
-          <div><img src="../../public/GGbond.jpg"/></div>
-          <span>电影4</span>
-        </div>
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影1</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影2</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影3</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影4</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影4</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影4</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影4</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影4</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影4</span>-->
+<!--        </div>-->
+<!--        <div class="move">-->
+<!--          <div><img src="../../public/GGbond.jpg"/></div>-->
+<!--          <span>电影4</span>-->
+<!--        </div>-->
+        <MovieList :m-list="movieLists"></MovieList>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+  .movie_detail{
+    color: aliceblue;
+    background-color: rgb(30, 30, 30);
+  }
   .top{
     width: 90vw;
     height: 90vh;
-    border: 1px solid #c8c9cc;
+
     display: flex;
   }
   .left{
@@ -153,7 +191,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
     justify-items: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid #c8c9cc;
+
     width: 20%;
   }
   .backbutton{
@@ -169,7 +207,6 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
   }
   .image{
     /* //border: 1px solid red; */
-    display: flex;
     justify-content: center;
 
   }
@@ -245,15 +282,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
   .mainline div{
     border:dashed  2px #b1b3b8;
   }
-  .move_container{
-    flex-wrap: wrap;
-    display: flex;
-    padding: 0.5vw;
-    justify-content:space-around;
-    align-items: center;
-    width: 100%;
-    height: 80%;
-  }
+
   .move{
     width: 20%;
     height: 80%;
@@ -263,8 +292,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
     margin-bottom: 2vh;
   }
   .move_container img{
-    width: 15vw;
-    height: 15vh;
+    width: 10vw;
   }
   .move span{
     text-align: center;

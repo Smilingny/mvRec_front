@@ -2,6 +2,7 @@
 
 import {Search} from "@element-plus/icons-vue";
 import {ref} from "vue";
+import { useRouter } from "vue-router";
 import SearchBar from "../components/SearchBar.vue";
 const searchName=ref("444444")
 const submitSearch=()=>{
@@ -15,13 +16,18 @@ const tag=ref([
 ])
 const story=ref("依据具体的设计需求，我们可以通过以下步骤来设置 Element 分割线宽度： 1. 在 HTML 页面中引入 Element UI 组件库的分割线组件，并在页面中使用该组件。 2. 在分割线组件中设置分割线宽度属性值。 在 Element UI 分割线组件中，分割线宽度属性的默认值为 1 像素，可以通过传入不同的属性值来控制分割线的粗细。 例如，我们可以通过设置类似下面的代码来将分割线宽度设置为 2 像素：" +
     "依据具体的设计需求，我们可以通过以下步骤来设置 Eleme依据具体的设计需求，我们可以通过以下步骤来设置 Eleme")
+
+const router = useRouter();
+function toDetailPage() {
+  router.push({name: 'moviedetail'});
+}
 </script>
 
 <template>
   <div class="search_result">
     <SearchBar></SearchBar>
     <div class="show_box">
-      <div class="move">
+      <div class="move" @click="toDetailPage">
         <div class="picture"><img src="../../public/GGbond.jpg" height="1080" width="1416"/></div>
         <div class="introduction">
           <div class="name">{{name}}</div>
@@ -44,7 +50,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
       </div>
 
 
-      <div class="move">
+      <div class="move" @click="toDetailPage">
         <div class="picture"><img src="../../public/GGbond.jpg" height="1080" width="1416"/></div>
         <div class="introduction">
           <div class="name">{{name}}</div>
@@ -67,7 +73,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
       </div>
 
 
-      <div class="move">
+      <div class="move" @click="toDetailPage">
         <div class="picture"><img src="../../public/GGbond.jpg" height="1080" width="1416"/></div>
         <div class="introduction">
           <div class="name">{{name}}</div>
@@ -90,7 +96,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
       </div>
 
 
-      <div class="move">
+      <div class="move" @click="toDetailPage">
         <div class="picture"><img src="../../public/GGbond.jpg" height="1080" width="1416"/></div>
         <div class="introduction">
           <div class="name">{{name}}</div>
@@ -113,7 +119,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
       </div>
 
 
-      <div class="move">
+      <div class="move" @click="toDetailPage">
         <div class="picture"><img src="../../public/GGbond.jpg" height="1080" width="1416"/></div>
         <div class="introduction">
           <div class="name">{{name}}</div>
@@ -136,7 +142,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
       </div>
 
 
-      <div class="move">
+      <div class="move" @click="toDetailPage">
         <div class="picture"><img src="../../public/GGbond.jpg" height="1080" width="1416"/></div>
         <div class="introduction">
           <div class="name">{{name}}</div>
@@ -180,6 +186,7 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
   .show_box{
   }
   .move{
+    cursor: pointer;
     width: 80vw;
     height: 25vh;
     border-radius: 1vw;
