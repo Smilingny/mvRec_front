@@ -14,5 +14,18 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '/@': path.resolve(__dirname, 'src') 
     }
-  }
+  },
+  server: {//配置代理
+    host: '0.0.0.0',
+    port: 8087,
+    // 是否开启 https
+    https: false,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8088",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 })
