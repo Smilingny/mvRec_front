@@ -1,7 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue'
 import SearchBar from '../components/SearchBar.vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+import MovieList from "@/components/MovieList.vue";
 const router = useRouter()
 
 const i = "@/assets/indexview/xskdjs2.webp"
@@ -75,12 +76,12 @@ const movieLists = ref([
     {
         name: 'movie1',
         kind: 'comedy',
-        img: 'agzz2.webp'
+        img: '/src/assets/indexview/agzz1.webp'
     },
     {
         name: 'movie2',
         kind: 'science',
-        img: 'agzz2.webp'
+        img: '/src/assets/indexview/agzz1.webp'
     },
     {
         name: 'movie3',
@@ -173,12 +174,23 @@ const movieLists = ref([
         img: 'agzz2.webp'
     },
 ]);
-const currentMovies = computed(() => movieLists.value.filter(item => activeTab.value === 'all' ? true : item.kind === activeTab.value));
+const currentMovies = computed(
+    () => movieLists.value.filter(item => activeTab.value === 'all' ? true : item.kind === activeTab.value));
 function handleClickTab(tab) {
     activeTab.value = tab.value;
 }
+const currentPageIndex = ref('');
+function onPageChange(pageIndex) {
+    currentPageIndex.value = pageIndex;
+}
+const currentCarouselItemIndex = ref(0);
+function onCarouselChange(index) {
+    currentCarouselItemIndex.value = index
+}
 
-const toDetail=()=>{
+const isCurrentCarouselItem = computed(() => index => currentCarouselItemIndex.value === index);
+
+const toDetail = () => {
     router.push('/moviedetail')
 }
 
@@ -187,37 +199,39 @@ const toDetail=()=>{
 <template>
     <div class="contain">
         <SearchBar class="search-bar"></SearchBar>
-        <el-carousel ref="carouselDom" height="800px">
-            <el-carousel-item v-for="item in list" :key="item.title"
-                :style="{backgroundImage: `url('/src/assets/indexview/${item.image}')`}">
-                <div class="information">
-                    <div class="title">
-                        <h2>{{ item.title }}</h2>
-                        <p>{{ item.desc }}
-                        </p>
-                        <el-button>查看</el-button>
-                    </div>
-                    <div class="picture">
-                        <div class="img">
-                            <img class="p-item" src="../assets/indexview/xskdjs1.webp" alt="" @click="handleSetCarousel(0)">
-                            <span class='img-text'>肖申克的救赎</span>
-                        </div>
-                        <div class="img">
-                            <img class="p-item" src="../assets/indexview/ttnkh1.webp" alt="" @click="handleSetCarousel(1)">
-                            <span class='img-text'>泰坦尼克号</span>
-                        </div>
-                        <div class="img">
-                            <img class="p-item" src="../assets/indexview/xjcy1.webp" alt="" @click="handleSetCarousel(2)">
-                            <span class='img-text'>星际穿越</span>
-                        </div>
-                        <div class="img">
-                            <img class="p-item" src="../assets/indexview/agzz1.webp" alt="" @click="handleSetCarousel(3)">
-                            <span class='img-text'>阿甘正传</span>
+        <div class="carousel-container">
+            <el-carousel ref="carouselDom" height="800px" @change="onCarouselChange">
+                <el-carousel-item v-for="item in list" :key="item.title"
+                    :style="{ backgroundImage: `url('/src/assets/indexview/${item.image}')` }">
+                    <div class="information">
+                        <div class="title">
+                            <h2>{{ item.title }}</h2>
+                            <p>{{ item.desc }}
+                            </p>
+                            <el-button>查看</el-button>
                         </div>
                     </div>
+                </el-carousel-item>
+            </el-carousel>
+            <div class="picture">
+                <div class="img">
+                    <img :class="['p-item', isCurrentCarouselItem(0) ? 'active' : '']" src="../assets/indexview/xskdjs1.webp" alt="" @click="handleSetCarousel(0)">
+                    <span class='img-text'>肖申克的救赎</span>
                 </div>
-            </el-carousel-item>
-        </el-carousel>
+                <div class="img">
+                    <img :class="['p-item', isCurrentCarouselItem(1) ? 'active' : '']" src="../assets/indexview/ttnkh1.webp" alt="" @click="handleSetCarousel(1)">
+                    <span class='img-text'>泰坦尼克号</span>
+                </div>
+                <div class="img">
+                    <img :class="['p-item', isCurrentCarouselItem(2) ? 'active' : '']" src="../assets/indexview/xjcy1.webp" alt="" @click="handleSetCarousel(2)">
+                    <span class='img-text'>星际穿越</span>
+                </div>
+                <div class="img">
+                    <img :class="['p-item', isCurrentCarouselItem(3) ? 'active' : '']" src="../assets/indexview/agzz1.webp" alt="" @click="handleSetCarousel(3)">
+                    <span class='img-text'>阿甘正传</span>
+                </div>
+            </div>
+        </div>
 
         <div class="tabs">
             <div class="header">
@@ -229,13 +243,19 @@ const toDetail=()=>{
                 </ul>
             </div>
             <el-divider />
-            <el-row :gutter="20">
-                <el-col :span="6" v-for="item in currentMovies" :key="item.name">
-                    <el-card shadow="hover" style="background-image: url('/src/assets/indexview/agzz2.webp');" @click="toDetail">
-                    </el-card>
-                    <p>{{ item.name }}</p>
-                </el-col>
-            </el-row>
+<!--            <el-row :gutter="20">-->
+<!--                <el-col :span="3" v-for="item in currentMovies" :key="item.name">-->
+<!--                    <el-card shadow="hover" style="background-image: url('/src/assets/indexview/agzz1.webp');"-->
+<!--                        @click="toDetail">-->
+<!--                    </el-card>-->
+<!--                    <p>{{ item.name }}</p>-->
+<!--                </el-col>-->
+<!--            </el-row>-->
+          <MovieList :mList="currentMovies"></MovieList>
+            <!-- 分页组件 -->
+            <el-pagination background layout="prev, pager, next" :total="currentMovies.length"
+                @current-change="onPageChange" style="margin-top: 20px;">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -244,7 +264,7 @@ const toDetail=()=>{
 .contain {
     height: 100vw;
     display: flex;
-    height: 1800px;
+    height: 1870px;
     flex-direction: column;
     align-items: center;
     background-color: black;
@@ -295,8 +315,10 @@ const toDetail=()=>{
         width: 400px;
         margin-bottom: 20px;
     }
+
     .title {
         position: relative;
+
         .el-button {
             position: absolute;
             bottom: 0;
@@ -309,12 +331,24 @@ const toDetail=()=>{
         }
     }
 }
-
-.picture {
-    width: 540px;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
+.carousel-container {
+    width: 100%;
+    position: relative;
+    .picture {
+        width: 540px;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        position: absolute;
+        right: 30px;
+        bottom: 75px;
+        color: white;
+        .active {
+            width: 140px;
+            height: 200px;
+            font-weight: 800;
+        }
+    }
 }
 
 .img {
@@ -372,22 +406,7 @@ const toDetail=()=>{
         }
     }
 
-    .el-row {
-        height: 870px;
-        overflow: hidden;
-    }
 
-    .el-card {
-        height: 200px;
-        width: 100%;
-        background-size: cover;
-    }
-
-    p {
-        text-align: center;
-        color: white;
-        line-height: 90px;
-    }
 
 
 }
@@ -412,6 +431,14 @@ const toDetail=()=>{
     }
 }
 
+:deep(.el-pagination) {
+    display: flex;
+    justify-content: flex-end;
+}
+
+:deep(.el-card) {
+    cursor: pointer;
+}
 
 
 .el-carousel__item h3 {
@@ -428,5 +455,4 @@ const toDetail=()=>{
 
 .el-carousel__item:nth-child(2n + 1) {
     background-color: #d3dce6;
-}
-</style>
+}</style>

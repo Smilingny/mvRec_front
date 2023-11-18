@@ -2,6 +2,7 @@
   import { ref } from 'vue'
   const username = ref('')
   const password = ref('')
+  const account = ref('')
   const checkpassword = ref('')
 </script>
 
@@ -10,10 +11,11 @@
     <div class="contain">
       <h1 style="color:aliceblue; margin-bottom: 15px;">注册</h1>
       <div class="login">
-        <input class='input-item' v-model="username" type="text" placeholder="请输入账号"> 
-        <input class='input-item' v-model="password" type="password" placeholder="请输入密码"> 
-        <input class='input-item' v-model="checkpassword" type="password" placeholder="确认密码"> 
-        <button class="btn">点击注册</button>
+        <input class='input-item' v-model="account" type="text" placeholder="请输入账号">
+        <input class='input-item' v-model="username" type="text" placeholder="请输入用户名">
+        <input class='input-item' v-model="password" type="password" placeholder="请输入密码">
+        <input class='input-item' v-model="checkpassword" type="password" placeholder="确认密码">
+        <button class="btn" @click="register">点击注册</button>
         <router-link to="/" class="return">返回登录</router-link>
       </div>
   </div>
@@ -25,8 +27,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 .contain::before{
   content: '';
@@ -42,7 +44,7 @@
 }
 .login{
   width: 450px;
-  height: 400px;
+  height: 450px;
   border: 2px solid #2980b9;
   border-radius: 20px;
   display: flex;
