@@ -46,13 +46,14 @@ const getUserInfo=()=>{
   align-items: center;
   overflow-x: hidden;
   margin-left: 20vw;
-  border-left: solid 1px #E6E8EB;
+
 }
   .common-layout{
     width: 100vw;
     height: 100vh;
     color: #606266;
     display: flex;
+    background-color: ;
   }
   .side{
     background-color: #666666;
@@ -60,7 +61,7 @@ const getUserInfo=()=>{
     height: 100vh;
     position: fixed;
     border: 1px white solid;
-    margin-left: 20px;
+    margin-left: 10px;
 
   }
 

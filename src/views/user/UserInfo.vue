@@ -10,13 +10,13 @@ const toEditMessage=()=>{
 </script>
 
 <template class="main">
-    <div class="count">账号 <div>1234566</div></div>
-    <div class="sex">性别<div>1234566</div></div>
-    <div class="birthday">生日<div>1234566</div></div>
-    <div class="email">邮箱<div>1234566</div></div>
+    <div class="text">账号 <div>1234566</div></div>
+    <div class="text">性别<div>1234566</div></div>
+    <div class="text">生日<div>1234566</div></div>
+    <div class="text">邮箱<div>1234566</div></div>
     <div>
-      <el-button type="primary" plain @click="toChangePassword">修改密码</el-button>
-      <el-button type="success" plain @click="toEditMessage">编辑资料</el-button>
+      <el-button type="info" @click="toChangePassword">修改密码</el-button>
+      <el-button type="info" @click="toEditMessage">编辑资料</el-button>
     </div>
   <router-view>
   </router-view>
@@ -38,4 +38,5 @@ const toEditMessage=()=>{
   margin-left: 2.5vw;
   font-size: 20px;
 }
+
 </style>
