@@ -24,7 +24,7 @@ const backUserInfo=()=>{
       <el-input  v-model="form.sex" />
     </el-form-item>
 
-    <el-form-item label="生日" >
+    <el-form-item label="生日">
         <el-form-item prop="date1" >
           <el-date-picker
               v-model="form.birthday"

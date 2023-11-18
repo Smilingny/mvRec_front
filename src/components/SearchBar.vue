@@ -9,13 +9,16 @@
   const toSearchResult = ()=>{
     router.push('/searchresult')
   }
+  const toindex=()=>{
+    router.push('/index')
+  }
 </script>
 
 <template>
   <div class="header">
     <div class="litem">
       <el-icon :size="30" class="icon1"><VideoCameraFilled /></el-icon>
-      <span class="text-item">云推视频</span>
+      <span class="text-item" @click="toindex">云推视频</span>
     </div>
     <div class="ritem">
       <el-input
@@ -39,7 +42,7 @@
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(239, 239, 239, 1);
-  opacity: 0.72;
+  opacity: 0.9;
   border-radius: 20px;
   text-align: center;
   align-items: center;
@@ -58,25 +61,25 @@
 }
 .icon1{
   margin-left: 10px;
-  color: #2980b9;
+  color: black;
 }
 .icon2{
   margin-right: 10px;
   margin-left: 5px;
-  color: #2980b9;
+  color: black;
 }
 .text-item{
   margin-left: 5px;
   font-size: 15px;
   font-weight: 700;
   display: block;
-  color: #2980b9;
+  color: black;
 }
 .but{
   width: 50px;
   height: 30px;
   border: none;
-  color: #2980b9;
+  color: black;
 }
 .input-item{
   border-radius: 20px;

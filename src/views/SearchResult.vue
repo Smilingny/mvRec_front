@@ -170,10 +170,11 @@ function toDetailPage() {
 <style scoped>
   .search_result{
     height: 100%;
-    width: 95vw;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: black;
   }
   .search_box{
     width: 80%;

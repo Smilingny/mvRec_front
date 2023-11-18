@@ -6,6 +6,7 @@
   const route = useRoute()
   const account = ref('')
   const password = ref('')
+  const username = ref('')
   const token=ref('');
   const toIndex=()=>{
     const data = new URLSearchParams();
@@ -32,16 +33,15 @@
 </script>
 
 <template>
-  <div>
     <div class="contain">
       <h1 style="color:aliceblue; margin-bottom: 15px;">登录</h1>
       <div class="login">
         <input class='input-item' v-model="account" type="text" placeholder="请输入账号">
-        <input class='input-item' v-model="password" type="password" placeholder="请输入密码"> 
+        <input class='input-item' v-model="username" type="text" placeholder="请输入用户名">
+        <input class='input-item' v-model="password" type="password" placeholder="请输入密码">
         <button class="btn" @click="toIndex">登录</button>
         <router-link to="/register" class="return">前往注册</router-link>
       </div>
-  </div>
   </div>
 </template>
 
@@ -50,8 +50,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   /* background-image: url(../assets/backgroungpic.jpg);
   background-size: cover; */
 }
@@ -69,7 +69,7 @@
 }
 .login{
   width: 450px;
-  height: 350px;
+  height: 410px;
   border: 2px solid #2980b9;
   border-radius: 20px;
   display: flex;

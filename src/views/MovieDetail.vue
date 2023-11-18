@@ -4,9 +4,6 @@ import {ArrowLeftBold, ArrowRightBold, Star, StarFilled} from "@element-plus/ico
 import {onMounted, ref} from "vue";
 import MovieList from "@/components/MovieList.vue";
 import SearchBar from "@/components/SearchBar.vue";
-const changeComment=()=>{//修改评论
-
-}
 onMounted(
     ()=>{
       console.log(4444)
@@ -15,6 +12,10 @@ onMounted(
 const back=()=>{
 
 }
+const form=ref({
+  score:'',
+  content:''
+})
 const items=ref([
   { type: '', label: '标签一' },
   { type: 'danger', label: '标签四' },
@@ -69,6 +70,8 @@ const comdata=ref([
   {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'},
   {uname:'username',score:'四星',content:'很不错hhhhhhhhhhhhhhhhhhsssss'}
 ])
+const dialogFormVisible = ref(false)
+const formLabelWidth = '140px'
 const story=ref("依据具体的设计需求，我们可以通过以下步骤来设置 Element 分割线宽度： 1. 在 HTML 页面中引入 Element UI 组件库的分割线组件，并在页面中使用该组件。 2. 在分割线组件中设置分割线宽度属性值。 在 Element UI 分割线组件中，分割线宽度属性的默认值为 1 像素，可以通过传入不同的属性值来控制分割线的粗细。 例如，我们可以通过设置类似下面的代码来将分割线宽度设置为 2 像素：")
 </script>
 
@@ -107,8 +110,38 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
             <div class="peoples">2500人评分</div>
           </div>
         </div>
-<!--        <div my_comment><el-button @click="changeComment" round>我的评分：{{ my_comment }}</el-button></div>-->
+        <div my_comment @click="dialogFormVisible = true"><el-button round>我的评分：{{ my_comment }}</el-button></div>
       </div>
+      <el-dialog v-model="dialogFormVisible" title="电影评分及评价">
+        <el-form :model="form">
+          <el-form-item label="评价" :label-width="formLabelWidth">
+            <el-input v-model="form.content" autocomplete="off"  placeholder="请给出您的评价"/>
+          </el-form-item>
+          <el-form-item label="评分" :label-width="formLabelWidth">
+            <el-select v-model="form.score" placeholder="选择您的评分">
+              <el-option label="0" value="0" />
+              <el-option label="1" value="1" />
+              <el-option label="2" value="2" />
+              <el-option label="3" value="3" />
+              <el-option label="4" value="4" />
+              <el-option label="5" value="5" />
+              <el-option label="6" value="6" />
+              <el-option label="7" value="7" />
+              <el-option label="8" value="8" />
+              <el-option label="9" value="9" />
+              <el-option label="10" value="10" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <template #footer>
+      <span class="dialog-footer">
+        <el-button type="primary" @click="dialogFormVisible = false">
+          确认
+        </el-button>
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+      </span>
+        </template>
+      </el-dialog>
       <div class="right">
         <div class="director">
           <div class="titleline">
@@ -162,9 +195,22 @@ const story=ref("依据具体的设计需求，我们可以通过以下步骤来
       </div>
     </div>
   </div>
+
 </template>
 
 <style scoped>
+.el-button--text {
+  margin-right: 15px;
+}
+.el-select {
+  width: 300px;
+}
+.el-input {
+  width: 300px;
+}
+.dialog-footer button:first-child {
+  margin-right: 10px;
+}
 .mx-1{
   margin-left: 3px;
 }

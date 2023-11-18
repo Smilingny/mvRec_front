@@ -206,9 +206,7 @@ const toDetail = () => {
                     <div class="information">
                         <div class="title">
                             <h2>{{ item.title }}</h2>
-                            <p>{{ item.desc }}
-                            </p>
-                            <el-button>查看</el-button>
+                            <p>{{ item.desc }}</p>
                         </div>
                     </div>
                 </el-carousel-item>
@@ -294,7 +292,7 @@ const toDetail = () => {
 
 .search-bar {
     position: absolute;
-    top: 40px;
+    top: 20px;
     z-index: 9999;
 }
 
@@ -314,6 +312,7 @@ const toDetail = () => {
     P {
         width: 400px;
         margin-bottom: 20px;
+        line-height: 1.5;
     }
 
     .title {

@@ -14,6 +14,9 @@ const toBrowsingHistory=()=>{
 }
 const getUserInfo=()=>{
 }
+const toindex=()=>{
+  router.push('/index')
+}
 </script>
 
 <template>
@@ -24,10 +27,10 @@ const getUserInfo=()=>{
           <div class="uname">{{username}}</div>
         </div>
         <el-divider />
-        <div class="two_button">
+        <div class="three_button">
           <el-button class="bt" @click="toUserInfo"  round> <el-icon ><UserFilled /></el-icon>个人信息</el-button>
-
           <el-button class="bt" @click="toBrowsingHistory" round><el-icon><View /></el-icon>浏览记录</el-button>
+          <el-button class="bt" @click="toindex" round type="danger"><el-icon><House /></el-icon>返回首页</el-button>
         </div>
       </div>
       <div class="main">
@@ -75,13 +78,13 @@ const getUserInfo=()=>{
     font-size: 20px;
     background-color: #666666;
   }
-  .side .two_button{
+  .side .three_button{
     display: flex;
     justify-content:space-between;
     align-items: center;
     flex-direction: column;
   }
-  .side .two_button .bt{
+  .side .three_button .bt{
     margin: 1vh;
     width: 90%;
     height:5vh ;
