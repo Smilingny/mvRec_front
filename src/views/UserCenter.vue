@@ -2,8 +2,9 @@
 
 import {UserFilled} from "@element-plus/icons-vue";
 import {View} from "@element-plus/icons-vue";
-import {reactive ,ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import router from "@/router";
+import axios from "axios";
 
 const username=ref("Mike")//存储用户名
 const toUserInfo=()=>{//跳转到用户信息
@@ -17,6 +18,26 @@ const getUserInfo=()=>{
 const toindex=()=>{
   router.push('/index')
 }
+
+const toStatistic=()=>{
+  router.push('/usercenter/statistics')
+}
+onMounted(()=>{
+  axios
+      .get('/api/getInfo', {
+        headers: {
+          'Authorization':localStorage.getItem('token')
+        },
+      })
+      .then(
+          (response) => {
+            username.value=response.data.name
+          },
+          (error) => {
+            console.log(error); // 打印网络错误
+          },
+      );
+})
 </script>
 
 <template>
@@ -28,10 +49,12 @@ const toindex=()=>{
         </div>
         <el-divider />
         <div class="three_button">
-          <el-button class="bt" @click="toUserInfo"  round> <el-icon ><UserFilled /></el-icon>个人信息</el-button>
+          <el-button class="bt" @click="toUserInfo"  round> <el-icon><UserFilled /></el-icon>个人信息</el-button>
           <el-button class="bt" @click="toBrowsingHistory" round><el-icon><View /></el-icon>浏览记录</el-button>
+          <el-button class="bt" @click="toStatistic" round><el-icon><Histogram /></el-icon>数据统计</el-button>
           <el-button class="bt" @click="toindex" round type="danger"><el-icon><House /></el-icon>返回首页</el-button>
         </div>
+
       </div>
       <div class="main">
         <router-view></router-view>
@@ -41,30 +64,32 @@ const toindex=()=>{
 
 <style scoped>
 .main{
-  background-color: white;
+  background-color: black;
   width: 80vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
-  margin-left: 20vw;
+  margin-left: 22vw;
+  margin-top: 20px;
 
 }
   .common-layout{
     width: 100vw;
     height: 100vh;
-    color: #606266;
+    background-color: black;
     display: flex;
-    background-color: ;
+    //background-color: ;
   }
   .side{
     background-color: #666666;
     width: 18vw;
-    height: 100vh;
+    height: 94vh;
     position: fixed;
     border: 1px white solid;
-    margin-left: 10px;
+    margin: 20px;
+    border-radius: 10px;
 
   }
 

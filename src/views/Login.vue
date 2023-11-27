@@ -1,35 +1,38 @@
 <script setup>
-  import { ref } from 'vue'
-  import { useRouter, useRoute } from 'vue-router'
-  import axios from "axios";
-  const router = useRouter()
-  const route = useRoute()
-  const account = ref('')
-  const password = ref('')
-  const username = ref('')
-  const token=ref('');
-  const toIndex=()=>{
-    const data = new URLSearchParams();
-    data.append('account', account.value);
-    data.append('password', password.value);
-    axios
-        .post('/api/login',data, {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+
+import { useRouter, useRoute } from 'vue-router'
+import axios from "axios";
+import {ref} from "vue";
+const router = useRouter()
+const route = useRoute()
+const account = ref('')
+const password = ref('')
+const token=ref('');
+const toIndex=()=>{
+  const data = new URLSearchParams();
+  data.append('account', account.value);
+  data.append('password', password.value);
+  console.log(data)
+  axios
+      .post('/api/login',data, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      })
+      .then(
+          (response) => {
+            token.value = response.data;
+            localStorage.setItem('token',token.value)
+            if(token.value){
+              router.push('/index');
+            }
           },
-        })
-        .then(
-            (response) => {
-              token.value = response.data;
-            },
-            (error) => {
-              console.log(error); // 打印网络错误
-            },
-        );
-    if(token.value){
-      router.push('/index');
-    }
-  }
+          (error) => {
+            console.log(error); // 打印网络错误
+          },
+      );
+
+}
 </script>
 
 <template>
@@ -37,7 +40,6 @@
       <h1 style="color:aliceblue; margin-bottom: 15px;">登录</h1>
       <div class="login">
         <input class='input-item' v-model="account" type="text" placeholder="请输入账号">
-        <input class='input-item' v-model="username" type="text" placeholder="请输入用户名">
         <input class='input-item' v-model="password" type="password" placeholder="请输入密码">
         <button class="btn" @click="toIndex">登录</button>
         <router-link to="/register" class="return">前往注册</router-link>

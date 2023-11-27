@@ -3,12 +3,44 @@
   import { useRouter } from 'vue-router'
   const router = useRouter()
   import { Search } from '@element-plus/icons-vue'
+  import axios from "axios";
+  import {useStore} from "vuex";
+  const keyword=ref('')
+  const searchlists=ref([])
   const toUserCenter = ()=>{
     router.push('/usercenter/userinfo')
+
   }
+
+  const pageSize=50
+  const pageNumber=ref(1)
+  const store = useStore();
   const toSearchResult = ()=>{
-    router.push('/searchresult')
+    axios
+        .get('/api/searchMovie', {
+          params: {
+            pageSize: pageSize,
+            pageNumber: pageNumber.value,
+            keyWord:keyword.value
+          },
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': localStorage.getItem('token')
+          },
+        })
+        .then(
+            (response) => {
+              store.commit('setSearchResults', response.data.records);
+
+              router.push('/searchresult');
+            },
+            (error) => {
+              console.log(error); // 打印网络错误
+            },
+        )
   }
+
+
   const toindex=()=>{
     router.push('/index')
   }
@@ -22,7 +54,7 @@
     </div>
     <div class="ritem">
       <el-input
-      v-model="input2"
+      v-model="keyword"
       class="input-item"
       placeholder="Please Input"
     />
